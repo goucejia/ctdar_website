@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title> ICDAR 2019 cTDaR | Evaluation</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/animate.min.css" rel="stylesheet"> 
+	<link href="css/lightbox.css" rel="stylesheet"> 
+	<link href="css/main.css" rel="stylesheet">
+	<link href="css/responsive.css" rel="stylesheet">
+	<script type="text/javascript" async
+	  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+	</script>
+
+	<!--[if lt IE 9]>
+		<script src="js/html5shiv.js"></script>
+		<script src="js/respond.min.js"></script>
+	<![endif]-->       
+	<link rel="shortcut icon" href="images/ico/favicon.ico">
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
+<body>
+	<header id="header">      
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 overflow">
+				</div>
+			 </div>
+		</div>
+		<div class="navbar navbar-inverse" role="banner">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<!-- <span class="sr-only">Toggle navigation</span> -->
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+
+					<!-- todo: fix logo -->
+					<a class="navbar-brand" href="index.html">
+						<h1><img src="images/temp_logo.png" alt="logo"></h1>
+					</a>
+				</div>
+
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="index.html">Home</a></li>
+						<li><a href="tasks.html">Tasks</a></li> 
+						<li class="dropdown"><a href="#">Dataset<i class="fa fa-angle-down"></i></a>
+							<ul role="menu" class="sub-menu">
+								<li><a href="dataset-description.html">Description</a></li>
+								<li><a href="dataset-training.html">Training Dataset</a></li>
+								<li><a href="dataset-testing.html">Test Dataset</a></li>
+							</ul>
+						</li>     
+						<li class="active"><a href="evaluation.html">Evaluation</a></li>
+						<li><a href="organizers.html">Organizers</a></li>
+						<li><a href="faq.html">FAQ</a></li>               
+					</ul>
+				</div>
+<!-- 				<div class="search">
+					<form role="form">
+						<i class="fa fa-search"></i>
+						<div class="field-toggle">
+							<input type="text" class="search-form" autocomplete="off" placeholder="Search">
+						</div>
+					</form>
+				</div> -->
+			</div>
+		</div>
+	</header>
+	<!--/#header-->
+
+	<section id="page-breadcrumb">
+		<div class="vertical-center sun">
+			 <div class="container">
+				<div class="row">
+					<div class="action">
+						<div class="col-sm-12">
+							<h1 class="title">Evaluation</h1>
+						</div>
+					 </div>
+				</div>
+			</div>
+		</div>
+   </section>
+	<!--/#page-breadcrumb-->
+
+	<section id="features">
+		<div class="container">
+			<div class="row">
+				<div class="single-features">
+					<div class="col-sm-1 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+					</div>
+					<div class="col-sm-10 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+						<p>
+							The ICDAR 2019 cTDaR evaluates two aspects of table analysis: table detection and recognition. We choose the metric (i) to evaluate the performance of table region detection, and apply the metric (ii) to evaluate that of table recognition. Based on these measures, an overall performance of various algorithms can be compared with each other. 
+						</p>
+						<br>
+						<ol type="i">
+							<li>
+								<p>
+									Metric for table region detection task
+								</p>
+								<p align="left">
+									The task is evaluated by a traditional method. Intersection over Union (IoU)[1] is calculated to estimate whether a table region detected by the participant is correctly located. Let A denote the region detected by a participant and B denote the corresponding region described in the groundtruth file. The IOU is calculated as follows: 
+								</p>
+								<p>$$IoU=\frac{A\bigcap B}{A+B-A\bigcap B}$$</p>
+								<p>
+									Average Precision (AP) is the metric to evaluate the task. For the task, the precision/recall curve is computed from a method’s ranked output. Recall is defined as the proportion of all positive examples ranked above a given rank. Precision is the proportion of all examples above that rank which are from the positive class. The AP summarizes the shape of the precision/recall curve, and is defined as the mean precision at a set of eleven equally spaced recall levels [0,0.1,0.2,...,1].
+								</p>
+								
+							</li>
+							<br>
+							<li>
+								<p>
+									Metric for table recognition task
+								</p>
+								<p>
+									The task is evaluated by the structure of a table that is defined as a matrix of cells. For each cell, participants are required to return the coordinates of each corner of bounding polygon, textual content (optional) and its start/end column/row positions. We propose the following metric: Cell’s adjacency relation-based table structure evaluation (inspired by Gobel’s method [2]).
+								</p>
+								<ul>
+									<li>
+										<p>
+											For comparing two cell structures, we use the method: for each table region, we align each groundtruth cell to the predicted cell with IoU > σ, identify the valid predicted cells, and then generate a list of adjacency relations between each valid cell and its nearest neighbor in horizontal and vertical directions. Blank cells are not represented in the grid. No adjacency relations are generated between blank cells or a blank cell and a content cell. This 1-D list of adjacency relations can be compared to the groundtruth by using precision and recall measures. If both cells are identical and the direction matches, then it is marked as correctly retrieved; otherwise it is marked as incorrect. 
+										</p>
+<!-- 										<div class="img-container" >
+											<img src="./images/data/3.jpg"  style="width: 60%; height: 50%; max-width: 600px" />
+											<p>Figure 2: Comparison of an incorrectly detected cell structure with the groundtruth [2]</p>
+										</div> -->
+									</li>
+								</ul>
+							</li>
+						</ol>
+						<br>
+						<p>
+							We will also release a number of tools to enable the participants to automatically compare their result to the groundtruth.
+						</p>
+						<br>
+						<br>
+						<h3>References</h3>
+						<p id="references2">[1] L. Gao, X. Yi, Z. Jiang, L. Hao and Z. Tang, “ICDAR 2017 POD Competition,” in ICDAR, 2017, pp. 1417-1422.</p>
+						<p id="references3">[2] M. C. Gobel, T. Hassan, E. Oro, G. Orsi, ”ICDAR2013 Table Competition,” in Proc. of the 12th ICDAR (IEEE, 2013), pp. 1449-1453.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	 <!--/#features-->
+
+	<footer id="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="copyright-text text-center">
+						<p>&copy; PKU Founder Group 2019. All Rights Reserved.</p>
+						<p>Designed by <a target="_blank" href="http://www.themeum.com">Themeum</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!--/#footer-->
+
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/lightbox.min.js"></script>
+	<script type="text/javascript" src="js/wow.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>   
+</body>
+</html>
