@@ -126,14 +126,75 @@
 						<img src="images/data/sample-d.jpg" class="img-responsive" alt="">
 						<div class="w-100"></div>
 						<p> Figure (d) : handwritten table</p>
+
+						<br>
+						<p>
+							Example of dataset categories:
+							<br>
+							(a, b, c) modern dataset; (d) archival dataset.
+						</p>
 					</div>
 				</div>
 
-				<div class="single-features">
+<!-- 				<div class="single-features">
 					<div class="col-sm-10 col-sm-offset-1 wow fadeInRight" data-wow-duration="300ms" data-wow-delay="100ms">
+						
+					</div>
+				</div> -->
+
+				<div class="single-features">
+					<div class="col-sm-10 col-sm-offset-1 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+						<h3>
+							Ground Truth Format
+						</h3>
 						<p>
-							Example of dataset categories, (a, b, c) modern dataset; (d) archival dataset.
+							For the annotation of dataset, we use an similar notation derived from ICDAR 2013 Table Competition format, creating a single XML file to store the structures.
 						</p>
+						<p>
+							In the XML file. Each &lt;table&gt; element corresponds to a table, which contains a single &lt;Coords&gt; element with [points] attribute to indicates the coordinates of the bounding polygon with 4 vertices. Table also contain a list of &lt;Cell&gt; elements, for each &lt;Cell&gt; element attributes [start-row], [start-col], [end-row] and [end-col] denotes its position in the table, and a unique numerical [id] for this cell.The element &lt;Coords&gt; for the &lt;Cell&gt; element denotes the coordinates of the bounding polygon of this cell box, and &lt;content&gt; is the text within this cell.
+						</p>
+						<br>
+
+						<div id="annotation-example">
+							<p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;</p>
+							<p>&lt;document filename="KS-RA-07-013-EN.PDF_314.xml"&gt;</p>
+							<div style="text-indent:30px;">
+									<p>&lt; table id="1" &gt;</p>
+									<div style="text-indent:60px;">
+										<p>&lt;Coords points="92,442 92,528 350,528 350,442"/&gt;</p>
+										<p>&lt;cell end-col="1" end-row="0" id="1" start-col="1" start-row="0"&gt;</p>
+										<div style="text-indent:90px;">
+											<p>&lt;Coords points="154,442 154,453 200,453 200,442"/&gt;</p>
+											<p>&lt;content&gt;IndustryA&lt;/content&gt;</p>
+										</div>
+										<p>&lt;/cell&gt;</p>
+										<p> ... </p>
+										<p>&lt;cell end-col="4" end-row="4" id="24" start-col="4" start-row="4"&gt;</p>
+										<div style="text-indent:90px;">
+											<p>&lt;Coords points="334,517 334,528 350,528 350,517"/&gt;</p>
+											<p>&lt;content&gt;660&lt;/content&gt;</p>
+										</div>
+										<p>&lt;/cell&gt;</p>
+									</div>
+									<p>&lt;/table&gt;</p>
+									<p> ... </p>
+									<p>&lt; table id="2" &gt;</p>
+									<div style="text-indent:60px;">
+										<p>&lt;Coords points="414,442 414,528 673,528 673,442"/&gt;</p>
+										<p>&lt;cell end-col="1" end-row="0" id="1" start-col="1" start-row="0"&gt;</p>
+										<div style="text-indent:90px;">
+											<p>&lt;Coords points="477,442 477,453 522,453 522,442"/&gt;</p>
+											<p>&lt;content&gt;IndustryB&lt;/content&gt;</p>
+										</div>
+										<p>&lt;/cell&gt;</p>
+										<p> ... </p>
+									</div>
+									<p>&lt;/table&gt;</p>
+									<p> ... </p>
+							</div>
+							<p>&lt;/document&gt;</p>
+							<!-- <p>&lt; &gt;</p> -->
+						</div>
 					</div>
 				</div>
 

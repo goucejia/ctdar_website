@@ -716,6 +716,13 @@ ul.sub-menu {
   margin-left: 60px;
 }
 
+#annotation-example p {
+  font-size: 14px;
+  color: black;
+  /*padding: 0 0;*/
+  line-height: 10px;
+}
+
 .single-features {
   overflow: hidden;
   padding-top: 40px;
