@@ -62,12 +62,13 @@
   }
 
   h2{
-    font-size: 32px;
+    font-size: 28px;
     color: #686868;
   }
 
   h3{
     font-size: 18px;
+    color: #686868;
   }
 
   p{
@@ -518,7 +519,7 @@ ul.sub-menu {
 #home-slider .slide-text{
   position: absolute;
   top: 0px;
-  left: 100px;
+  left: 70px;
   width: 500px;
 }
 
@@ -621,7 +622,7 @@ ul.sub-menu {
 }
 
 #home-slider .btn-common {
-  margin-top: 20px;
+  margin-top: 5px;
 }
 
 #home-slider .preloader {

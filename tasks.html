@@ -97,16 +97,102 @@
 			<div class="row">
 				<div class="single-features">
 					<div class="col-sm-10 col-sm-offset-1 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
-						<p>The competition will contain two tasks:</p>
-						<ul>
-							<li>
-								<p>Task 1: Table Region Detection</p>
-							</li>
-							<li>
-								<p>Task 2: Table Recognition</p>
-							</li>
-						</ul>
-						<p>Detailed description will be announced shortly together with the input format. </p>
+						<h2>Task Description</h2>
+						<p>
+							The aim of this competition is to evaluate the performance of state of the art methods for table detection (TRACK A) and table recognition (TRACK B). For the first track, document images containing one or several tables are provided. For TRACK B two subtracks exist: the first subtrack (B.1) provides the table region. Thus, only the table structure recognition must be performed. The second subtrack (B.2) provides no a-priori information. This means, the table region and table structure detection has to be done. The Ground Truth is provided in a similar format as for the ICDAR 2013 competition (see [2]):
+						</p>
+						<br>
+						<div id="annotation-example">
+							<p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;</p>
+							<p>&lt;document filename="filename.jpg"&gt;</p>
+							<div style="text-indent:30px;">
+									<p>&lt; table id="Table_1540517170416_3" &gt;</p>
+									<div style="text-indent:60px;">
+										<p>&lt;Coords points="180,160 4354,160 4354,3287 180,3287"/&gt;</p>
+										<p>&lt;cell id='TableCell_1540517477147_58' start-row='0' start-col='0' end-row='1' end-col='2'&gt;</p>
+										<div style="text-indent:90px;">
+											<p>&lt;Coords points="180,160 177,456 614,456 615,163"/&gt;</p>
+										</div>
+										<p>&lt;/cell&gt;</p>
+										<p> ... </p>
+									</div>
+									<p>&lt;/table&gt;</p>
+									<p> ... </p>
+							</div>
+							<p>&lt;/document&gt;</p>
+						</div>
+						<br>
+						<p>The difference to Gobel et al. [2] is the Coords tag which defines a table/cell as a polygon specified by a list of coordinates. For B.1 the table and its coordinates is given together with the input image.</p>
+						<h3>Important Note:</h3>
+						<p>For the modern dataset, the convex hull of the content describes a cell region. For the historical dataset, it is requested that the output region of a cell is the cell boundary. This is necessary due to the characteristics of handwritten text, which is often overlapping with different cells.</p>
+
+						<h2>Submission Protocol</h2>
+						<p>The submitted result file has to be a compressed tar file (.tar.gz) containing separate xml result files for each image in the test set. The folder structure must not be changed. Do not include the images in the result file. Even if your algorithm doesn’t detect any table on a certain image, you have to provide an “empty” result file. Please send your results to 
+							<a href="mailto:cTDAR@cvl.tuwien.ac.at">cTDAR@cvl.tuwien.ac.at</a> </p>
+						<br>
+
+						<span style="font-size: 18px; color: #686868; font-weight: bold">For Track A </span>
+						<span style="font-size: 16px; color: #686868;">methods have to provide an XML for each input image containing the table region, e.g.</span>
+						<p><strong>Input:</strong></p>
+						<p>/a/table1.jpg</p>
+						<p><strong>Requested output:</strong></p>
+						<p>/a/table1.jpg.xml with the table region information:</p>
+						<div id="annotation-example">
+							<p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;</p>
+							<p>&lt;document filename="table1.jpg"&gt;</p>
+							<div style="text-indent:30px;">
+									<p>&lt; table id="0" &gt;</p>
+									<div style="text-indent:60px;">
+										<p>&lt;Coords points="87,117 87,220 551,220, 551,87"/&gt;</p>
+									</div>
+									<p>&lt;/table&gt;</p>
+							</div>
+						<p>&lt;/document&gt;</p>
+						</div>
+						<br>
+						<span style="font-size: 18px; color: #686868; font-weight: bold">For Track B </span>
+						<span style="font-size: 16px; color: #686868;">methods have to provide an XML for each input image containing the table region and the cell structure. Note that the cell region is defined different for the modern dataset (convex hull of the content) and the historical dataset (cell boundary).</span>
+						<br> <br>
+						<p style="font-size: 18px; color: #686868; font-weight: bold">Track B.1</p>
+						<p><strong>Input:</strong></p>
+						<p>/a/table1.jpg + /a/table1.xml (specifying the table region)</p> <br>
+						<p style="font-size: 18px; color: #686868; font-weight: bold">Track B.2</p>
+						<p><strong>Input:</strong></p>
+						<p>/a/table1.jpg</p> <br>
+						<p><strong>Requested output</strong> for both tracks:</p>
+						<div id="annotation-example">
+							<p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;</p>
+							<p>&lt;document filename="table1.jpg"&gt;</p>
+							<div style="text-indent:30px;">
+									<p>&lt; table id="0" &gt;</p>
+									<div style="text-indent:60px;">
+										<p>&lt;Coords points="87,117 87,220 551,220, 551,87"/&gt;</p>
+										<p>&lt;cell id='0' start-row='0' start-col='0' end-row='1' end-col='2'&gt;</p>
+										<div style="text-indent:90px;">
+											<p>&lt;Coords points="180,160 177,456 614,456 615,163"/&gt;</p>
+										</div>
+										<p>&lt;/cell&gt;</p>
+										<p> ... </p>
+									</div>
+									<p>&lt;/table&gt;</p>
+									<p> ... </p>
+							</div>
+							<p>&lt;/document&gt;</p>
+						</div>
+						<p>The coords of a cell are defined by the convex hull of the content of a cell (modern dataset) or are defined by the cell border (historical dataset).</p>
+						<br>
+						<p>Example image of the modern dataset: </p>
+						<img src="images/data/task-sample-1.PNG" class="img-responsive" alt="" style="width: 70%; height: 70%; max-width: 550px">
+						<br>
+						<p>Example image of the modern dataset: </p>
+						<img src="images/data/task-sample-2.png" class="img-responsive" alt="" style="width: 70%; height: 80%; max-width: 550px">
+						<br>
+						<h3>References</h3>
+						<p id="references2">[1] L. Gao, X. Yi, Z. Jiang, L. Hao and Z. Tang, “ICDAR 2017 POD Competition,” in ICDAR, 2017, pp. 1417-1422.</p>
+						<p id="references3">[2] M. C. Gobel, T. Hassan, E. Oro, G. Orsi, ”ICDAR2013 Table Competition,” in Proc. of the 12th ICDAR (IEEE, 2013), pp. 1449-1453.</p>
+
+						<br>
+						<p>To participate in this competition, please click <a href="./sign-up.html">here</a>.</p>
 					</div>
 				</div>
 			</div>
