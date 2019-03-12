@@ -97,7 +97,7 @@
 			<div class="row">
 				<div class="single-features">
 					<div class="col-sm-10 col-sm-offset-1 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
-						<h2>Task Description</h2>
+						<h2><strong>Task Description</strong></h2>
 						<p>
 							The aim of this competition is to evaluate the performance of state of the art methods for table detection (TRACK A) and table recognition (TRACK B). For the first track, document images containing one or several tables are provided. For TRACK B two subtracks exist: the first subtrack (B.1) provides the table region. Thus, only the table structure recognition must be performed. The second subtrack (B.2) provides no a-priori information. This means, the table region and table structure detection has to be done. The Ground Truth is provided in a similar format as for the ICDAR 2013 competition (see [2]):
 						</p>
@@ -123,10 +123,11 @@
 						</div>
 						<br>
 						<p>The difference to Gobel et al. [2] is the Coords tag which defines a table/cell as a polygon specified by a list of coordinates. For B.1 the table and its coordinates is given together with the input image.</p>
-						<h3>Important Note:</h3>
-						<p>For the modern dataset, the convex hull of the content describes a cell region. For the historical dataset, it is requested that the output region of a cell is the cell boundary. This is necessary due to the characteristics of handwritten text, which is often overlapping with different cells.</p>
+						<!-- <h3>Important Note:</h3> -->
+						<p><strong>Important Note:</strong> For the modern dataset, the convex hull of the content describes a cell region. For the historical dataset, it is requested that the output region of a cell is the cell boundary. This is necessary due to the characteristics of handwritten text, which is often overlapping with different cells.</p>
 
-						<h2>Submission Protocol</h2>
+						<br>
+						<h2><strong>Submission Protocol</strong></h2>
 						<p>The submitted result file has to be a compressed tar file (.tar.gz) containing separate xml result files for each image in the test set. The folder structure must not be changed. Do not include the images in the result file. Even if your algorithm doesn’t detect any table on a certain image, you have to provide an “empty” result file. Please send your results to 
 							<a href="mailto:cTDAR@cvl.tuwien.ac.at">cTDAR@cvl.tuwien.ac.at</a> </p>
 						<br>
