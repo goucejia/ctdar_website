@@ -99,6 +99,8 @@
 			<div class="row">
 				<div class="single-features">
 					<div class="col-sm-10 col-sm-offset-1 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+						<p style="font-weight: bold;">The evaluation tool can be downloaded <a href="https://github.com/cndplab-founder/ctdar_measurement_tool" target="_blank">here.</a></p>
+						<br>
 						<p>
 							The ICDAR 2019 cTDaR evaluates two aspects of table analysis: table detection and recognition. We choose the metric (i) to evaluate the performance of table region detection, and apply the metric (ii) to evaluate that of table recognition. Based on these measures, an overall performance of various algorithms can be compared with each other. 
 						</p>
@@ -113,7 +115,7 @@
 								</p>
 								<p>$$IoU=\frac{A\bigcap B}{A+B-A\bigcap B}$$</p>
 								<p>
-									Average Precision (AP) is the metric to evaluate the task. For the task, the precision/recall curve is computed from a method’s ranked output. Recall is defined as the proportion of all positive examples ranked above a given rank. Precision is the proportion of all examples above that rank which are from the positive class. The AP summarizes the shape of the precision/recall curve, and is defined as the mean precision at a set of eleven equally spaced recall levels [0,0.1,0.2,...,1].
+									For the task, the precision/recall curve is computed from a method’s ranked output. Recall is defined as the proportion of all positive examples ranked above a given rank. Precision is the proportion of all examples above that rank which are from the positive class. Furthermore, F1 score will be computed based on the recall and precision value. The precision, recall and F1 score will be calculated under circumstances that IoU is equal to 0.6, 0.7, 0.8 and 0.9.
 								</p>
 								
 							</li>
@@ -129,6 +131,9 @@
 									<li>
 										<p>
 											For comparing two cell structures, we use the method: for each table region, we align each groundtruth cell to the predicted cell with IoU > σ, identify the valid predicted cells, and then generate a list of adjacency relations between each valid cell and its nearest neighbor in horizontal and vertical directions. Blank cells are not represented in the grid. No adjacency relations are generated between blank cells or a blank cell and a content cell. This 1-D list of adjacency relations can be compared to the groundtruth by using precision and recall measures. If both cells are identical and the direction matches, then it is marked as correctly retrieved; otherwise it is marked as incorrect. 
+										</p>
+										<p>
+											The precision, recall and F1 score will be calculated under circumstances that IoU is equal to 0.6, 0.7, 0.8 and 0.9 as the evaluation for track A.
 										</p>
 <!-- 										<div class="img-container" >
 											<img src="./images/data/3.jpg"  style="width: 60%; height: 50%; max-width: 600px" />
