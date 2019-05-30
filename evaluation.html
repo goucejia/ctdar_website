@@ -53,7 +53,12 @@
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="index.html">Home</a></li>
-						<li><a href="tasks.html">Tasks</a></li> 
+						<li class="dropdown"><a href="#">Tasks<i class="fa fa-angle-down"></i></a>
+							<ul role="menu" class="sub-menu">
+								<li><a href="tasks.html">Tasks</a></li>
+								<li><a href="results.html">Results</a></li>
+							</ul>
+						</li>
 						<li class="dropdown"><a href="#">Dataset<i class="fa fa-angle-down"></i></a>
 							<ul role="menu" class="sub-menu">
 								<li><a href="dataset-description.html">Description</a></li>
@@ -111,11 +116,13 @@
 									Metric for table region detection task
 								</p>
 								<p align="left">
-									The task is evaluated by a traditional method. Intersection over Union (IoU)[1] is calculated to estimate whether a table region detected by the participant is correctly located. Let A denote the region detected by a participant and B denote the corresponding region described in the groundtruth file. The IOU is calculated as follows: 
+									IoU is calculated to tell if a table region is correctly detected. It's used to  measure the overlapping of the detected polygons:
 								</p>
-								<p>$$IoU=\frac{A\bigcap B}{A+B-A\bigcap B}$$</p>
+								<p>$$IoU=\frac{area(GTP\bigcap DTP)}{area(GTP\bigcup DTP)}$$</p>
 								<p>
-									For the task, the precision/recall curve is computed from a method’s ranked output. Recall is defined as the proportion of all positive examples ranked above a given rank. Precision is the proportion of all examples above that rank which are from the positive class. Furthermore, F1 score will be computed based on the recall and precision value. The precision, recall and F1 score will be calculated under circumstances that IoU is equal to 0.6, 0.7, 0.8 and 0.9.
+									where <i>GTP</i> defines the Ground Truth Polygon of the table region and <i>DTP</i> defines the Detected Table Polygon. IoU has a range from 0 to 1, where 1 suggests the best possible segmentation. When evaluating, different threshold values of IoU  will be used to determine if a region is considered as being detected correctly.
+
+									Then, the precision and recall values are computed from a method’s ranked output. Recall is defined as the proportion of all true positive examples ranked above a given rank. Precision is the proportion of all examples above that rank which are from the positive class. Furthermore, F1 score will be computed as the harmonic average of recall and precision value. Precision, recall and F1 scores are calculated with IoU threshold of 0.6, 0.7, 0.8 and 0.9 respectively.
 								</p>
 								
 							</li>
@@ -125,7 +132,7 @@
 									Metric for table recognition task
 								</p>
 								<p>
-									The task is evaluated by the structure of a table that is defined as a matrix of cells. For each cell, participants are required to return the coordinates of each corner of bounding polygon, textual content (optional) and its start/end column/row positions. We propose the following metric: Cell’s adjacency relation-based table structure evaluation (inspired by Gobel’s method [2]).
+									This track is evaluated by comparing the structure of a table that is defined as a matrix of cells. For each cell, participants are required to return the coordinates of a polygon defining the cell (historical documents) or a polygon defining the convex hull of the cell's contents (modern documents). Additionally, participants must provide the start/end column/row information for each cell.We propose the following metric: Cell’s adjacency relation-based table structure evaluation (inspired by Gobel’s method [2]).
 								</p>
 								<ul>
 									<li>
@@ -145,9 +152,19 @@
 						</ol>
 						<br>
 						<p>
-							We will also release a number of tools to enable the participants to automatically compare their result to the groundtruth.
+							the final ranks of teams are decided by the weighted average F1 (WAvg. F1) value of the whole dataset for each track. The WAvg. F1 value is defined as:
+						</p>
+
+							<!-- <p>$$IoU=\frac{area(GTP\bigcap DTP)}{area(GTP\bigcup DTP)}$$</p> -->
+							<p>$$ WAvg. F1 = \frac{\sum\limits_{i=1}^4 IoU_i \cdot F1@IoU_i}{\sum\limits_{i=1}^4 IoU_i}$$</p>
+							
+						<p>
+							which shows that the weight of each F1 value is the corresponding IoU threshold. We think results with higher IoUs are more important than those with lower IoUs, so we use IoU threshold as the weight of each F1 value to get a definitive performance score for convenient comparison.
 						</p>
 						<br>
+						<p>
+							We will also release a number of tools to enable the participants to automatically compare their result to the groundtruth.
+						</p>
 						<br>
 						<h3>References</h3>
 						<p id="references2">[1] L. Gao, X. Yi, Z. Jiang, L. Hao and Z. Tang, “ICDAR 2017 POD Competition,” in ICDAR, 2017, pp. 1417-1422.</p>
